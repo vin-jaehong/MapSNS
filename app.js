@@ -1,33 +1,20 @@
-// 모듈 가져오기
 var express = require("express");
-var mariaDB = require("mariadb");
-
-// express 모듈 app 변수에 객체화 
+var bodyParser = require("body-parser");
 var app = express();
-// 포트
+var router = require("./router/index.js");
 
-// DB와 연동 해주는 모듈 생성
-var connect = mariaDB.createConnection({
-    host        : "localhost",
-    port        : "3306",
-    user        : "root",
-    password    : "ki040504",
-    database    : "location_based_sns"
-});
-
-app.get("/", function(req,res)
+app.listen(3000,(req,res)=>
 {
-    
+    console.log("server connected...!");
 });
 
-// DB 연동
-app.listen(3000,function()
-{
-    console.log("connect server...! port : 3000");
-});
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended:true}));
+app.use(express.static("./public"));
+app.set("view engine","ejs");
+app.set("views","./views");
 
-
-
+app.use(router);
 
 
 
