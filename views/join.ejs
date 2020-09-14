@@ -10,10 +10,12 @@
     <form action="/join" method="post">
         name : <input type="text" name="name"><br/> 
         gender : MEN<input type="radio" name="gender" value="M" checked> WOMEN<input type="radio" name="gender" value="F"><br/>
-        id : <input type="text" name="id"><br/>
+        id : <input type="text" name="id"><%=errMsg%><br/>
         Password : <input type="password" name="pw"><br/>
         e-mail : <input type="text" name="email"><br/>
         tel : <input type="text" name="tel"><br/>
+        [agreement_01]<br/>yes <input type="radio" name="agreement_01" value="Y"> No <input type="radio" name="agreement_01" value="N" checked><br/>
+        [agreement_02]<br/>yes <input type="radio" name="agreement_02" value="Y"> No <input type="radio" name="agreement_02" value="N" checked><br/>
         <input type="submit" value="Join">
     </form>
 </body>
