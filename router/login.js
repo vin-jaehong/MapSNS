@@ -44,7 +44,6 @@ passport.use("local-login", new localStrategy(
     {
         pool.query(`select ID,PW from user where ID = "${id}";`).then((rows)=>
         {
-
             // ID 조회 후 Password 조회
             if(!rows.length) done(null,false,{message:"ID를 찾을 수 없습니다."});
                 // ID 조회 실패
@@ -54,7 +53,6 @@ passport.use("local-login", new localStrategy(
                 
             // Login 성공
             const userLastLoginIp = req.headers['x-forwarded-for'] ||  req.connection.remoteAddress;
-            const userFirstLoginDate = moment().format("YYYY-MM-DD HH:mm:ss");
             const userLastLoginDate = moment().format("YYYY-MM-DD HH:mm:ss");
 
             //FIRST_LOGIN_DATE가 당일에 이미 등록이 되있는 경우 갱신을 하지 않기 위한 코드
@@ -67,16 +65,21 @@ passport.use("local-login", new localStrategy(
                 var query;
                 if(takeDbData!=nowDayDate)
                 {
-                    var query = `update user set FIRST_LOGIN_DATE ="${userFirstLoginDate}" where ID = "${id}";`;
+                    const userFirstLoginDate = moment().format("YYYY-MM-DD HH:mm:ss");
+
+                    query = `update user set FIRST_LOGIN_DATE ="${userFirstLoginDate}" where ID = "${id}";`;
                     pool.query(query);
                 }
                 query = `update user set LAST_LOGIN_IP = "${userLastLoginIp}", LAST_LOGIN_DATE="${userLastLoginDate}" where ID ="${id}";`;
-                pool.query(query);
+                pool.query(query).then(()=>
+                {
+                    done(null,{"id":id});
+                }).catch((err)=>{throw err;});
+            
             }).catch((err)=>{throw err;})
             
-            done(null,{"id":id});
-
             
+         
         }).catch((err)=>{throw err;});
     }
 ));
