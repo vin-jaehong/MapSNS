@@ -18,6 +18,7 @@ var pool = mariaDB.createPool({
 pool.getConnection();
 
 
+
 router.get("/",(req,res)=>
 {
     var msg;
@@ -28,9 +29,12 @@ router.get("/",(req,res)=>
 
 passport.serializeUser((user,done)=>
 {
-    console.log(user.name);
+    done(null,user.id);
 });
-
+passport.deserializeUser((id,done)=>
+{
+    done(null,id);
+});
 
 passport.use("local-join", new localStrategy(
     {
@@ -52,18 +56,17 @@ passport.use("local-join", new localStrategy(
             const userLastLoginIp = req.headers['x-forwarded-for'] ||  req.connection.remoteAddress;
             const userJoinDate = moment().format("YYYY-MM-DD");
             const userFirstLoginDate = moment().format("YYYY-MM-DD HH:mm:ss");
+            const userLastLoginDate = moment().format("YYYY-MM-DD HH:mm:ss");
             
-            
-            
-            const query = `insert into user(NAME,GENDER,ID,PW,EMAIL,TEL,LAST_LOGIN_IP,JOIN_DATE,FIRST_LOGIN_DATE,AGREEMENT_01,AGREEMENT_02)
+            const query = `insert into user(NAME,GENDER,ID,PW,EMAIL,TEL,LAST_LOGIN_IP,JOIN_DATE,FIRST_LOGIN_DATE,LAST_LOGIN_DATE,AGREEMENT_01,AGREEMENT_02)
             VALUES("${user.name}","${user.gender}","${user.id}","${user.pw}","${user.email}","${user.tel}",
-            "${userLastLoginIp}","${userJoinDate}","${userFirstLoginDate}","${user.agreement_01}","${user.agreement_02}");
+            "${userLastLoginIp}","${userJoinDate}","${userFirstLoginDate}","${userLastLoginDate}","${user.agreement_01}","${user.agreement_02}");
             `;
             
             pool.query(query).then((rows)=>
             {
                 // 쿼리문 실행 완료 후
-                return done(null,{"id":id,"name":user.name});
+                return done(null,{"id":id});
 
             }).catch((err)=>{throw err;});
             
@@ -79,19 +82,5 @@ router.post("/", passport.authenticate("local-join",
     failureFlash : true
 }));
 
-/*
-const user = req.body;
-    /*
-    user.name
-    user.gender
-    user.id
-    user.pw
-    user.email
-    user.tel
-    user.agreement_01
-    user.agreement_02
-    
-    
- */   
 
 module.exports = router;
