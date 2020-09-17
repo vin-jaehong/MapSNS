@@ -5,6 +5,7 @@ var localStrategy = require("passport-local").Strategy;
 var mariaDB = require("mariadb");
 var moment = require("moment");
 
+
 var pool = mariaDB.createPool({
     host    : "localhost",
     user    : "root",
@@ -74,13 +75,11 @@ passport.use("local-login", new localStrategy(
                 pool.query(query).then(()=>
                 {
                     done(null,{"id":id});
-                }).catch((err)=>{throw err;});
+                }).catch((err)=>{done(err);});
             
-            }).catch((err)=>{throw err;})
-            
-            
-         
-        }).catch((err)=>{throw err;});
+            }).catch((err)=>{done(err);})
+
+        }).catch((err)=>{done(err);});
     }
 ));
 

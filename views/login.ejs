@@ -4,13 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login Page</title>
+    <script
+  src="https://code.jquery.com/jquery-3.5.1.js"
+  integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+  crossorigin="anonymous"></script>
+    <script type="text/javascript" src="./js/login.js"></script>
 </head>
 <body>
+    
     Login Page<br/><br/>
     <form action="/login" method="post">
         ID : <input type="text" name="id"><%=errMsg%><br/>
         Password : <input type="password" name="pw"><br/>
         <input type="submit" value="login">
     </form>
+    
+    
+
 </body>
 </html>

@@ -68,10 +68,10 @@ passport.use("local-join", new localStrategy(
                 // 쿼리문 실행 완료 후
                 return done(null,{"id":id});
 
-            }).catch((err)=>{throw err;});
+            }).catch((err)=>{done(err);});
             
 
-        }).catch((err)=>{throw err;})
+        }).catch((err)=>{done(err);})
     }
 ));
 
