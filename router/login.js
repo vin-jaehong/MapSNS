@@ -19,12 +19,8 @@ pool.getConnection();
 
 router.get("/",(req,res)=>
 {
-    var msg;
-    var errMsg = req.flash("error");
-    if(errMsg)msg = errMsg;
-    res.render("login.ejs",{"errMsg":msg});
+    res.render("login.ejs");
 });
-
 
 passport.serializeUser((user,done)=>
 {
@@ -84,10 +80,19 @@ passport.use("local-login", new localStrategy(
 ));
 
 
-router.post("/", passport.authenticate("local-login",{
-    successRedirect : "/",
-    failureRedirect : "/login",
-    failureFlash : true
-}));
+router.post("/",(req,res,next)=>
+{
+    passport.authenticate("local-login", (err,user,info)=>
+    {
+        if(err) res.status(500).json(err);
+        if(!user) return res.json(info.message);
+
+        req.logIn(user, (err)=>
+        {
+            if(err) return next(err);
+            res.json(user);
+        });
+    })(req,res,next)
+});
 
 module.exports = router;

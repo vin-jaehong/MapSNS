@@ -11,13 +11,12 @@
     <script type="text/javascript" src="./js/login.js"></script>
 </head>
 <body>
+
     
     Login Page<br/><br/>
-    <form action="/login" method="post">
-        ID : <input type="text" name="id"><%=errMsg%><br/>
-        Password : <input type="password" name="pw"><br/>
-        <input type="submit" value="login">
-    </form>
+    ID : <input type="text" name="id"><div class="error"></div>
+    Password : <input type="password" name="pw"><br/>
+    <button class="login_btn">login</button>
     
     
 
