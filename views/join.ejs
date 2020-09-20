@@ -4,19 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Join Page</title>
+    <script
+  src="https://code.jquery.com/jquery-3.5.1.js"
+  integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+  crossorigin="anonymous"></script>
+    <script type="text/javascript" src="./js/join.js"></script>
 </head>
 <body>
+    
     Join Page<br/><br/>
-    <form action="/join" method="post">
-        name : <input type="text" name="name"><br/> 
-        gender : MEN<input type="radio" name="gender" value="M" checked> WOMEN<input type="radio" name="gender" value="F"><br/>
-        id : <input type="text" name="id"><%=errMsg%><br/>
-        Password : <input type="password" name="pw"><br/>
-        e-mail : <input type="text" name="email"><br/>
-        tel : <input type="text" name="tel"><br/>
-        [agreement_01]<br/>yes <input type="radio" name="agreement_01" value="Y"> No <input type="radio" name="agreement_01" value="N" checked><br/>
-        [agreement_02]<br/>yes <input type="radio" name="agreement_02" value="Y"> No <input type="radio" name="agreement_02" value="N" checked><br/>
-        <input type="submit" value="Join">
-    </form>
+    name : <input type="text" name="name"><br/> 
+    gender : MEN<input type="radio" name="gender" value="M" checked> WOMEN<input type="radio" name="gender" value="F"><br/>
+    id : <input type="text" name="id"><div class="error"></div><br/>
+    Password : <input type="password" name="pw"><br/>
+    e-mail : <input type="text" name="email"><br/>
+    tel : <input type="text" name="tel"><br/>
+    [agreement_01]<br/>yes <input type="radio" name="agreement_01" value="Y"> No <input type="radio" name="agreement_01" value="N" checked><br/>
+    [agreement_02]<br/>yes <input type="radio" name="agreement_02" value="Y"> No <input type="radio" name="agreement_02" value="N" checked><br/>
+    <button class="join_btn">join</button>
+    
+
 </body>
 </html>

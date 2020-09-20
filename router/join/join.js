@@ -36,6 +36,8 @@ passport.deserializeUser((id,done)=>
     done(null,id);
 });
 
+
+
 passport.use("local-join", new localStrategy(
     {
         usernameField : "id",
@@ -75,12 +77,23 @@ passport.use("local-join", new localStrategy(
     }
 ));
 
-router.post("/", passport.authenticate("local-join",
+
+router.post("/", (req,res,next)=>
 {
-    successRedirect : "/",
-    failureRedirect : "/join",
-    failureFlash : true
-}));
+    passport.authenticate("local-join", (err,user,info)=>
+    {
+        if(err) return res.status(500).json(err);
+        if(!user) return res.json(info.message);
+        
+        req.login(user, (err)=>
+        {
+            if(err) return next(err);
+            
+            res.json(user);
+        });
+    })(req,res,next);
+});
+
 
 
 module.exports = router;

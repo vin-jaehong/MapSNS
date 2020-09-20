@@ -1,8 +1,8 @@
 var express = require("express");
 var router = express.Router();
-var login = require("./login.js");
-var join = require("./join.js");
-var logout = require("./logout.js");
+var login = require("./login/login.js");
+var join = require("./join/join.js");
+var logout = require("./logout/logout.js");
 
 router.use("/login",login);
 router.use("/join",join);
