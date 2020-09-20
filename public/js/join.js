@@ -14,7 +14,7 @@
                 "email" : $("input[name='email']").val(),
                 "tel" : $("input[name='tel']").val(),
                 "agreement_01" : $("input[name='agreement_01']:checked").val(),
-                "agreement_02" : $("input[name='agreement_02']:checked").val(),
+                "agreement_02" : $("input[name='agreement_02']:checked").val()
             };
 
             sendAjax("http://localhost:3000/join", data);

@@ -13,8 +13,10 @@
         
         });
 
+        
         var sendAjax = (url, inputData)=>
         {
+            /*
             var data = JSON.stringify(inputData);
             
             var xhr = new XMLHttpRequest;
@@ -36,8 +38,31 @@
                 
                 
             });
+            */
+
+           $.ajax({
+            type : "POST",
+            url : "/login",
+            data : JSON.stringify(inputData),
+            success: (json)=>
+            {
+
+                
+                if(json.id) location.href = "/";
+                else
+                {
+                    $(".error").empty();
+                    $(".error").append(json);
+                }
+            },
+            error : (err)=>
+            {
+                alert(err);
+            }
+           });
         
         };
+        
         
         
     })
