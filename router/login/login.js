@@ -39,7 +39,6 @@ passport.use("local-login", new localStrategy(
     },
     (req,id,pw,done)=>
     {
-        
         pool.query(`select ID,PW from user where ID = "${id}";`).then((rows)=>
         {
             // ID 조회 후 Password 조회
@@ -83,6 +82,7 @@ passport.use("local-login", new localStrategy(
 
 router.post("/",(req,res,next)=>
 {
+    console.log(req.body);
     passport.authenticate("local-login", (err,user,info)=>
     {
         

@@ -19,11 +19,8 @@
            $.ajax({
             type : "POST",
             url : url,
-            data : 
-            {
-                "id" : inputData.id,
-                "pw" : inputData.pw
-            },
+            data :  inputData, 
+           
             success: (json)=>
             {   
                 if(json.id) location.href = "/";
@@ -35,7 +32,7 @@
             },
             error : (err)=>
             {
-                alert(err);
+                throw err;
             }
            });
         

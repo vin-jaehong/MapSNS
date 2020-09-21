@@ -23,29 +23,24 @@
 
         var sendAjax = (url, inputData)=>
         {
-            var data = JSON.stringify(inputData);
-            
-            var xhr = new XMLHttpRequest();
-            xhr.open("POST",url);
-            xhr.setRequestHeader("Content-Type","application/json");
-            xhr.send(data);
-
-            xhr.addEventListener("load", ()=>
+           $.ajax({
+            type : "POST",
+            url : url,
+            data : inputData, // 왜 JSON.stringify로 하면 안되는지?
+            success:(json)=>
             {
-                var msg = JSON.parse(xhr.responseText);
-                
-                if(!msg.id)
+                if(json.id)
                 {
-                    $(".error").empty();
-                    $(".error").append(msg);
+                    location.href="/";
                 }
-                else
-                {
-                    window.location.href="/";
-                }
-
-            });
-
+                $(".error").empty();
+                $(".error").append(json);
+            },
+            error:(err)=>
+            {
+                throw err;
+            } 
+           });
 
         }
 
