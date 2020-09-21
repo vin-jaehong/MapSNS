@@ -7,11 +7,12 @@ var session = require("express-session");
 var flash = require("connect-flash");
 
 
-
+//ipv4
 app.listen(3000,"0.0.0.0",(req,res)=>
 {
     console.log("server connected...!");
 });
+
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));

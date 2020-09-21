@@ -21,6 +21,7 @@ exports.loginView = (req,res)=>
     else res.render("login.ejs");
 };
 
+//passport
 passport.serializeUser((user,done)=>
 {
     done(null,user.id);
