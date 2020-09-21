@@ -16,38 +16,16 @@
         
         var sendAjax = (url, inputData)=>
         {
-            /*
-            var data = JSON.stringify(inputData);
-            
-            var xhr = new XMLHttpRequest;
-            xhr.open("POST",url);
-            xhr.setRequestHeader("Content-Type","application/json");
-            xhr.send(data);
-
-            xhr.addEventListener("load", ()=>
-            {
-                var msg = JSON.parse(xhr.responseText);
-                if(msg.id)
-                {
-                    window.location.href="/";
-                }
-                else
-                {
-                    document.querySelector(".error").innerHTML = msg;    
-                }
-                
-                
-            });
-            */
-
            $.ajax({
             type : "POST",
-            url : "/login",
-            data : JSON.stringify(inputData),
-            success: (json)=>
+            url : url,
+            data : 
             {
-
-                
+                "id" : inputData.id,
+                "pw" : inputData.pw
+            },
+            success: (json)=>
+            {   
                 if(json.id) location.href = "/";
                 else
                 {
