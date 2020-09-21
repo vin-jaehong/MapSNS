@@ -29,10 +29,6 @@
                     $(".error").empty();
                     $(".error").append(json);
                 }
-            },
-            error : (err)=>
-            {
-                throw err;
             }
            });
         
