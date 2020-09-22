@@ -3,7 +3,7 @@ var localStrategy = require("passport-local").Strategy;
 var mariaDB = require("mariadb");
 var moment = require("moment");
 
-
+// aws ec2 server
 var pool = mariaDB.createPool({
     host    : "3.20.235.147",
     user    : "root",
