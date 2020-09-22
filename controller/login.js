@@ -6,8 +6,8 @@ var moment = require("moment");
 // aws ec2 server
 var pool = mariaDB.createPool({
     host    : "15.164.166.6",
-    user    : "root",
-    password : "ki040504",
+    user    : "mapSNS",
+    password : "qls123",
     port : 3306,
     database : "location_based_sns"
 })
