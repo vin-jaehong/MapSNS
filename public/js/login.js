@@ -3,6 +3,7 @@
     $(()=>{
         $(".login_btn").click(()=>
         {
+            alert("Login Button Click");
             var data = 
             {
                 "id" : document.getElementsByName("id")[0].value,
