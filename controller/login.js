@@ -5,7 +5,7 @@ var moment = require("moment");
 
 
 var pool = mariaDB.createPool({
-    host    : "localhost",
+    host    : "3.20.235.147",
     user    : "root",
     password : "ki040504",
     port : 3306,
