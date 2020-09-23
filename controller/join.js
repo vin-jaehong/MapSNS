@@ -6,7 +6,7 @@ var localStrategy = require("passport-local").Strategy;
 
 
 var pool = mariaDB.createPool({
-    host    : "localhost",
+    host    : "3.34.133.190",
     user    : "root",
     password: "ki040504",
     port    : 3306,
